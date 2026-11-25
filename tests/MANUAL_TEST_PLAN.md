@@ -1,39 +1,33 @@
-# Manual Test Plan — Phase 1
+# Manual Test Plan
 
 ## Setup
-1. Run `npm install`.
-2. Run `npm run dev`.
-3. Test in a desktop browser and a touch-capable mobile browser.
+1. Install Node.js 20 or newer.
+2. Run `npm install`.
+3. Run `npm run dev` and open the local URL.
 
-## Functional checks
-- [ ] Game loads without console errors.
-- [ ] Down gravity pulls player downward.
-- [ ] Up gravity pulls player upward.
-- [ ] Left gravity pulls player left.
-- [ ] Right gravity pulls player right.
-- [ ] Gravity direction label updates.
-- [ ] Player collides with each platform side.
-- [ ] Movement follows the documented tangent direction.
-- [ ] Touching a collectible removes it and increments the counter.
-- [ ] Touching a hazard restarts the level.
-- [ ] Reaching the exit completes the level.
-- [ ] R restarts the level.
+## Desktop
+- [ ] Game fits the browser window without page scrolling.
+- [ ] A/D and left/right arrows move the player.
+- [ ] W, S, Q and E switch gravity up, down, left and right.
+- [ ] Gravity switching preserves tangent momentum without launching the player.
+- [ ] Player collides with all platforms in all four gravity directions.
+- [ ] Collecting each orb updates the energy counter once.
+- [ ] Touching the pink hazard restarts the room.
+- [ ] Touching the green exit completes the room even if orbs remain.
+- [ ] R restarts both an active and completed room.
 
-## Input checks
-- [ ] Gravity buttons respond to mouse click.
-- [ ] Gravity buttons respond to touch.
-- [ ] Movement buttons respond to press and release.
-- [ ] Keyboard movement works.
-- [ ] Keyboard gravity shortcuts work.
+## Touch
+- [ ] Gravity buttons respond to taps.
+- [ ] Movement buttons respond while held.
+- [ ] Releasing a movement button or moving the pointer away stops movement.
+- [ ] Two-finger input can move and switch gravity without stuck controls.
 
-## Regression checks
-- [ ] Repeated restarts do not multiply event handlers.
-- [ ] Switching gravity repeatedly does not cause unbounded velocity.
-- [ ] Player cannot become trapped outside the room.
-- [ ] All buttons remain visible at supported viewport sizes.
+## Responsive
+- [ ] Test landscape phone and tablet sizes.
+- [ ] Confirm all gravity and movement buttons remain visible.
+- [ ] Confirm browser back/navigation remains available.
 
-## Known limitations to resolve
-- Tangent-relative movement mapping needs usability verification for all four gravity directions.
-- Current level is a physics test room, not a tuned puzzle.
-- Visuals are geometric placeholders.
-- Responsive mobile control placement needs a dedicated pass.
+## Automated checks
+- `npm run typecheck`
+- `npm test`
+- `npm run build`

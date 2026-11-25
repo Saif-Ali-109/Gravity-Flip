@@ -1,13 +1,12 @@
-import Phaser from 'phaser';
+import type Phaser from 'phaser';
+import {
+  gravityTangent,
+  gravityVector,
+  type GravityDirection,
+  type Vector
+} from './gravityMath';
 
-export type GravityDirection = 'down' | 'up' | 'left' | 'right';
-
-const vectors: Record<GravityDirection, Phaser.Math.Vector2> = {
-  down: new Phaser.Math.Vector2(0, 1),
-  up: new Phaser.Math.Vector2(0, -1),
-  left: new Phaser.Math.Vector2(-1, 0),
-  right: new Phaser.Math.Vector2(1, 0)
-};
+export type { GravityDirection };
 
 export class GravityController {
   private direction: GravityDirection = 'down';
@@ -19,7 +18,7 @@ export class GravityController {
 
   setDirection(direction: GravityDirection): void {
     this.direction = direction;
-    const vector = vectors[direction];
+    const vector = gravityVector(direction);
     this.scene.physics.world.gravity.set(
       vector.x * this.strength,
       vector.y * this.strength
@@ -30,12 +29,11 @@ export class GravityController {
     return this.direction;
   }
 
-  getVector(): Phaser.Math.Vector2 {
-    return vectors[this.direction].clone();
+  getVector(): Vector {
+    return gravityVector(this.direction);
   }
 
-  getTangent(): Phaser.Math.Vector2 {
-    const gravity = vectors[this.direction];
-    return new Phaser.Math.Vector2(-gravity.y, gravity.x);
+  getTangent(): Vector {
+    return gravityTangent(this.direction);
   }
 }
