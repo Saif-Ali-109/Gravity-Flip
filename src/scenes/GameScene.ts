@@ -138,7 +138,6 @@ export class GameScene extends Phaser.Scene {
     this.player = this.physics.add.sprite(125, 475, 'player');
     this.player.setCollideWorldBounds(false);
     this.player.setMaxVelocity(650, 650);
-    this.player.setDrag(900, 900);
     this.player.setDepth(10);
     this.player.setSize(28, 32);
   }
