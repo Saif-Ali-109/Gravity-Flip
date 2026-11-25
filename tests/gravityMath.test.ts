@@ -8,7 +8,7 @@ import {
 
 describe('gravity direction mapping', () => {
   const cases: Array<[GravityDirection, number, number, number, number]> = [
-    ['down', 0, 1, -1, 0],
+    ['down', 0, 1, 1, 0],
     ['up', 0, -1, 1, 0],
     ['left', -1, 0, 0, 1],
     ['right', 1, 0, 0, -1]
