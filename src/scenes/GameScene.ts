@@ -277,19 +277,14 @@ export class GameScene extends Phaser.Scene {
     const negative = this.moveNegative || this.cursors.left.isDown || this.keys.A.isDown;
     const positive = this.movePositive || this.cursors.right.isDown || this.keys.D.isDown;
     const axis = Number(positive) - Number(negative);
-    const targetSpeed = tangent.x * axis * this.moveSpeed;
-    const targetVerticalSpeed = tangent.y * axis * this.moveSpeed;
     const body = this.player.body as Phaser.Physics.Arcade.Body;
     const gravity = this.gravity.getVector();
+    const gravitySpeed = body.velocity.x * gravity.x + body.velocity.y * gravity.y;
 
-    if (gravity.x !== 0) {
-      this.player.setVelocity(targetSpeed, Phaser.Math.Linear(body.velocity.y, gravity.y * 130, 0.025));
-    } else {
-      this.player.setVelocity(
-        Phaser.Math.Linear(body.velocity.x, gravity.x * 130, 0.025),
-        targetVerticalSpeed
-      );
-    }
+    this.player.setVelocity(
+      tangent.x * axis * this.moveSpeed + gravity.x * gravitySpeed,
+      tangent.y * axis * this.moveSpeed + gravity.y * gravitySpeed
+    );
   }
 
   private completeLevel(): void {
