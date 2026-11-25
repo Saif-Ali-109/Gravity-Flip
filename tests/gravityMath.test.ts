@@ -26,6 +26,6 @@ describe('gravity direction mapping', () => {
   });
 
   it('projects velocity onto a movement axis', () => {
-    expect(projectOnto({ x: 3, y: 4 } as never, { x: 0, y: 1 })).toBe(4);
+    expect(projectOnto({ x: 3, y: 4 }, { x: 0, y: 1 })).toBe(4);
   });
 });
