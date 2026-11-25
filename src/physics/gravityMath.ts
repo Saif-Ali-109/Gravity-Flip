@@ -17,8 +17,13 @@ export function gravityVector(direction: GravityDirection): Vector {
 }
 
 export function gravityTangent(direction: GravityDirection): Vector {
-  const gravity = directions[direction];
-  return { x: -gravity.y, y: gravity.x };
+  const tangents: Record<GravityDirection, Vector> = {
+    down: { x: -1, y: 0 },
+    up: { x: 1, y: 0 },
+    left: { x: 0, y: 1 },
+    right: { x: 0, y: -1 }
+  };
+  return { ...tangents[direction] };
 }
 
 export function projectOnto(vector: Vector, axis: Vector): number {
